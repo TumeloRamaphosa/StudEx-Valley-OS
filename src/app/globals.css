@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* ============================================================
+   StudEx Valley OS — ClaudeClaw Mission Control
+   Brand: Neon Pink · Cream White · Dark YAML Terminal
+   ============================================================ */
+
+:root {
+  /* Surfaces — deep YAML/terminal base */
+  --bg: #0b0b0d;
+  --surface: #141418;
+  --surface-2: #1c1c22;
+  --surface-3: #24242c;
+  --border: #2c2c36;
+  --border-soft: #222229;
+
+  /* Neon pink — primary accent */
+  --pink: #ff2ec4;
+  --pink-bright: #ff5cd6;
+  --pink-dim: #b51f8c;
+  --pink-glow: rgba(255, 46, 196, 0.45);
+
+  /* Cream white — text + light surfaces */
+  --cream: #f6edd8;
+  --cream-bright: #fdf8ec;
+  --cream-dim: #a8a08c;
+  --cream-faint: #6f6a5d;
+
+  /* Status */
+  --queued: #8b86f5;
+  --running: #ff2ec4;
+  --done: #4fd6a8;
+  --warn: #ffb454;
+
+  --background: var(--bg);
+  --foreground: var(--cream);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-pink: var(--pink);
+  --color-pink-bright: var(--pink-bright);
+  --color-pink-dim: var(--pink-dim);
+  --color-cream: var(--cream);
+  --color-cream-bright: var(--cream-bright);
+  --color-cream-dim: var(--cream-dim);
+  --color-cream-faint: var(--cream-faint);
+  --color-queued: var(--queued);
+  --color-running: var(--running);
+  --color-done: var(--done);
+  --color-warn: var(--warn);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient neon glow blobs */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(600px circle at 12% 8%, rgba(255, 46, 196, 0.10), transparent 55%),
+    radial-gradient(700px circle at 88% 92%, rgba(139, 134, 245, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+/* Faint terminal scanlines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 3px,
+    transparent 4px
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@layer utilities {
+  .glow-pink {
+    box-shadow: 0 0 0 1px var(--pink-dim), 0 0 18px -2px var(--pink-glow);
+  }
+  .text-glow {
+    text-shadow: 0 0 12px var(--pink-glow);
+  }
+  .ring-pink {
+    box-shadow: 0 0 0 1px var(--pink);
+  }
+  .surface-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+  }
+  .grain {
+    background-image: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--surface-3);
+    border-radius: 99px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 1px var(--pink-dim), 0 0 14px -4px var(--pink-glow); }
+  50%      { box-shadow: 0 0 0 1px var(--pink), 0 0 26px 0px var(--pink-glow); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.caret::after {
+  content: "▋";
+  color: var(--pink);
+  animation: blink 1s steps(1) infinite;
+  margin-left: 2px;
+}
