@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV } from "@/lib/nav";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/logo";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -11,14 +12,12 @@ export function Sidebar() {
   return (
     <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-border bg-surface/60 backdrop-blur">
       <div className="flex items-center gap-3 px-5 h-16 border-b border-border">
-        <div className="h-8 w-8 rounded-lg grain glow-pink flex items-center justify-center font-mono text-pink font-bold">
-          //
-        </div>
+        <Logo size={34} className="shrink-0 rounded-lg glow-gold" />
         <div className="leading-tight">
-          <div className="font-mono text-sm text-cream-bright tracking-tight">
+          <div className="font-mono text-sm text-ink-strong tracking-tight">
             StudEx<span className="text-pink">·</span>OS
           </div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-cream-faint">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-faint">
             Mission Control
           </div>
         </div>
@@ -38,20 +37,20 @@ export function Sidebar() {
               className={cn(
                 "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all",
                 active
-                  ? "bg-surface-2 text-cream-bright glow-pink"
-                  : "text-cream-dim hover:text-cream hover:bg-surface-2/60"
+                  ? "bg-surface-2 text-ink-strong glow-pink"
+                  : "text-ink-dim hover:text-ink hover:bg-surface-2/60"
               )}
             >
               <Icon
                 size={17}
                 className={cn(
                   "shrink-0 transition-colors",
-                  active ? "text-pink" : "text-cream-faint group-hover:text-pink"
+                  active ? "text-pink" : "text-ink-faint group-hover:text-pink"
                 )}
               />
               <div className="min-w-0">
                 <div className="truncate font-medium">{item.label}</div>
-                <div className="truncate text-[10px] text-cream-faint">
+                <div className="truncate text-[10px] text-ink-faint">
                   {item.desc}
                 </div>
               </div>
@@ -61,12 +60,12 @@ export function Sidebar() {
       </nav>
 
       <div className="p-4 border-t border-border">
-        <div className="rounded-lg grain p-3 text-[11px] text-cream-dim">
+        <div className="rounded-lg grain p-3 text-[11px] text-ink-dim">
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-done animate-pulse" />
             <span className="font-mono">brain: claude-code</span>
           </div>
-          <div className="mt-1 text-cream-faint">
+          <div className="mt-1 text-ink-faint">
             wrapper online · bridge: telegram
           </div>
         </div>

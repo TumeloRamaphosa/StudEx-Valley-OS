@@ -24,8 +24,8 @@ export default function ChatPage() {
             return (
               <div key={i} className={mine ? "flex justify-end" : "flex justify-start"}>
                 <div className="max-w-[75%]">
-                  <div className="mb-1 flex items-center gap-2 text-[10px] font-mono text-cream-faint">
-                    <span className={mine ? "text-cream-dim" : "text-pink"}>
+                  <div className="mb-1 flex items-center gap-2 text-[10px] font-mono text-ink-faint">
+                    <span className={mine ? "text-ink-dim" : "text-pink"}>
                       {mine ? "you" : m.from}
                     </span>
                     <span className="rounded bg-surface-2 px-1.5">{m.channel}</span>
@@ -34,8 +34,8 @@ export default function ChatPage() {
                   <div
                     className={
                       mine
-                        ? "rounded-2xl rounded-tr-sm bg-pink/15 border border-pink/30 px-4 py-2.5 text-sm text-cream"
-                        : "rounded-2xl rounded-tl-sm surface-card px-4 py-2.5 text-sm text-cream"
+                        ? "rounded-2xl rounded-tr-sm bg-pink/15 border border-pink/30 px-4 py-2.5 text-sm text-ink"
+                        : "rounded-2xl rounded-tl-sm surface-card px-4 py-2.5 text-sm text-ink"
                     }
                   >
                     {m.text}
@@ -49,9 +49,9 @@ export default function ChatPage() {
         <div className="flex items-center gap-3 border-t border-border p-4">
           <input
             placeholder="Message the hive mind…"
-            className="flex-1 rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm text-cream outline-none placeholder:text-cream-faint focus:ring-pink"
+            className="flex-1 rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm text-ink outline-none placeholder:text-ink-faint focus:ring-pink"
           />
-          <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-pink text-bg transition-transform hover:scale-105 active:scale-95">
+          <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-pink text-ink-strong transition-transform hover:scale-105 active:scale-95">
             <Send size={16} />
           </button>
         </div>

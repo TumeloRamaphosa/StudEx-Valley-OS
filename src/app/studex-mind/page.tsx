@@ -20,12 +20,12 @@ const EDGES = [
 
 const pos = (id: string) => NODES.find((n) => n.id === id)!;
 
-export default function HiveMindPage() {
+export default function StudExMindPage() {
   return (
     <div className="mx-auto max-w-5xl">
       <PageHeader
-        title="Hive Mind"
-        subtitle="One hive_mind_log, three views. This is the 2D force-directed graph."
+        title="StudEx Mind"
+        subtitle="One studex_mind_log, three views. This is the 2D force-directed graph."
         action={
           <div className="flex gap-2">
             <Badge tone="running">2D graph</Badge>
@@ -66,16 +66,16 @@ export default function HiveMindPage() {
                 cx={n.x}
                 cy={n.y}
                 r={n.r / 8 + 1.4}
-                fill="#141418"
-                stroke="#ff2ec4"
-                strokeWidth="0.5"
+                fill={n.id === "Main" ? "#ff2ec4" : "#fffdf7"}
+                stroke={n.id === "Main" ? "#d11f92" : "#c9a84c"}
+                strokeWidth="0.6"
               />
               <text
                 x={n.x}
                 y={n.y + n.r / 8 + 5}
                 textAnchor="middle"
                 fontSize="2.6"
-                fill="#f6edd8"
+                fill="#15110c"
                 fontFamily="monospace"
               >
                 {n.id}
@@ -85,7 +85,7 @@ export default function HiveMindPage() {
         </svg>
       </Card>
 
-      <p className="mt-4 text-center text-[12px] text-cream-faint">
+      <p className="mt-4 text-center text-[12px] text-ink-faint">
         If the list view is operational, layer 2D and 3D on top later — same
         underlying table.
       </p>

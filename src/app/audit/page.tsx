@@ -23,7 +23,7 @@ export default function AuditPage() {
       <Card className="p-0 overflow-hidden">
         <div className="overflow-x-auto scrollbar-thin">
           <table className="w-full text-left text-[12px]">
-            <thead className="border-b border-border font-mono text-cream-faint">
+            <thead className="border-b border-border font-mono text-ink-faint">
               <tr>
                 <th className="px-5 py-3 font-normal">time</th>
                 <th className="px-3 py-3 font-normal">corr-id</th>
@@ -35,15 +35,15 @@ export default function AuditPage() {
             <tbody className="divide-y divide-border">
               {ROWS.map((r, i) => (
                 <tr key={i} className="font-mono hover:bg-surface-2/50">
-                  <td className="whitespace-nowrap px-5 py-3 text-cream-dim">{r.t}</td>
-                  <td className="px-3 py-3 text-cream-faint">{r.cid}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-ink-dim">{r.t}</td>
+                  <td className="px-3 py-3 text-ink-faint">{r.cid}</td>
                   <td className="px-3 py-3 text-pink">{r.actor}</td>
                   <td className="px-3 py-3">
                     <Badge tone={tone(r.kind) as "warn" | "running" | "done" | "muted"}>
                       {r.event}
                     </Badge>
                   </td>
-                  <td className="px-3 py-3 text-cream">{r.detail}</td>
+                  <td className="px-3 py-3 text-ink">{r.detail}</td>
                 </tr>
               ))}
             </tbody>

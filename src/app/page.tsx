@@ -71,11 +71,11 @@ export default function MissionControl() {
                         : "h-2.5 w-2.5 rounded-full bg-done"
                   }
                 />
-                <h2 className="font-mono text-sm text-cream-bright">
+                <h2 className="font-mono text-sm text-ink-strong">
                   {col.label}
                 </h2>
               </div>
-              <span className="font-mono text-xs text-cream-faint">
+              <span className="font-mono text-xs text-ink-faint">
                 {col.tasks.length.toString().padStart(2, "0")}
               </span>
             </div>
@@ -87,15 +87,15 @@ export default function MissionControl() {
                   className="cursor-pointer p-4 transition-all hover:glow-pink hover:-translate-y-0.5"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[11px] text-cream-faint">
+                    <span className="font-mono text-[11px] text-ink-faint">
                       {t.id}
                     </span>
                     <Badge tone="muted">{t.tag}</Badge>
                   </div>
-                  <p className="mt-2 text-sm text-cream leading-snug">
+                  <p className="mt-2 text-sm text-ink leading-snug">
                     {t.title}
                   </p>
-                  <div className="mt-3 flex items-center gap-2 text-[11px] text-cream-dim">
+                  <div className="mt-3 flex items-center gap-2 text-[11px] text-ink-dim">
                     <Bot size={13} className="text-pink" />
                     <span className="font-mono">{t.agent}</span>
                   </div>

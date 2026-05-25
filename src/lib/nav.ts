@@ -23,7 +23,7 @@ export const NAV: NavItem[] = [
   { href: "/chat", label: "Chat", icon: MessageSquare, desc: "All channels, one view" },
   { href: "/memories", label: "Memories", icon: Brain, desc: "Three-layer recall" },
   { href: "/scheduler", label: "Scheduler", icon: CalendarClock, desc: "Cron in plain English" },
-  { href: "/hive-mind", label: "Hive Mind", icon: Network, desc: "Graph of the swarm" },
+  { href: "/studex-mind", label: "StudEx Mind", icon: Network, desc: "Graph of the swarm" },
   { href: "/war-room", label: "War Room", icon: Swords, desc: "Standup + discuss" },
   { href: "/audit", label: "Audit", icon: ScrollText, desc: "Append-only trail" },
 ];

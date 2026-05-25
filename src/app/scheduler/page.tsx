@@ -27,10 +27,10 @@ export default function SchedulerPage() {
               <Clock size={17} className="text-pink" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="font-mono text-sm text-cream-bright">{j.name}</div>
-              <div className="text-[12px] text-cream-dim">
+              <div className="font-mono text-sm text-ink-strong">{j.name}</div>
+              <div className="text-[12px] text-ink-dim">
                 {j.english}{" "}
-                <span className="ml-1 rounded bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] text-cream-faint">
+                <span className="ml-1 rounded bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] text-ink-faint">
                   {j.cron}
                 </span>
               </div>
@@ -38,7 +38,7 @@ export default function SchedulerPage() {
             <Badge tone="muted">{j.agent}</Badge>
             <ToggleRight
               size={28}
-              className={j.on ? "text-pink" : "text-cream-faint rotate-180"}
+              className={j.on ? "text-pink" : "text-ink-faint rotate-180"}
             />
           </Card>
         ))}

@@ -8,7 +8,7 @@ const LAYERS = [
 ];
 
 const MEMS = [
-  { text: "User brand colors: neon pink #FF2EC4 + cream #F6EDD8 on dark YAML base.", score: 0.97, pinned: true },
+  { text: "User brand: neon pink #FF2EC4 + gold #C9A84C on cream paper #FBF6E9 (daylight).", score: 0.97, pinned: true },
   { text: "Obsidian vault '2nd Brain' is the source-of-truth knowledge corpus.", score: 0.94, pinned: true },
   { text: "Weekly exchange newsletter ships Mondays 07:30 via Ops cron.", score: 0.81, pinned: false },
   { text: "Prefers Telegram over Slack for on-the-go approvals.", score: 0.76, pinned: false },
@@ -35,15 +35,15 @@ export default function MemoriesPage() {
           return (
             <Card key={l.name}>
               <Icon size={18} className="text-pink" />
-              <div className="mt-3 font-mono text-sm text-cream-bright">{l.name}</div>
-              <p className="mt-1 text-[12px] text-cream-dim leading-relaxed">{l.note}</p>
+              <div className="mt-3 font-mono text-sm text-ink-strong">{l.name}</div>
+              <p className="mt-1 text-[12px] text-ink-dim leading-relaxed">{l.note}</p>
             </Card>
           );
         })}
       </div>
 
       <Card className="p-0">
-        <div className="border-b border-border px-5 py-3 font-mono text-xs text-cream-faint">
+        <div className="border-b border-border px-5 py-3 font-mono text-xs text-ink-faint">
           ranked recall · query: &quot;brand + cadence&quot;
         </div>
         <div className="divide-y divide-border">
@@ -52,10 +52,10 @@ export default function MemoriesPage() {
               {m.pinned ? (
                 <Pin size={14} className="shrink-0 text-pink" />
               ) : (
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cream-faint" />
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ink-faint" />
               )}
-              <p className="flex-1 text-sm text-cream">{m.text}</p>
-              <span className="font-mono text-xs text-cream-faint">
+              <p className="flex-1 text-sm text-ink">{m.text}</p>
+              <span className="font-mono text-xs text-ink-faint">
                 {m.score.toFixed(2)}
               </span>
             </div>

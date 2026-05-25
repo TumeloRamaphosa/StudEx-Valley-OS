@@ -18,7 +18,7 @@ export default function WarRoomPage() {
       />
 
       <div className="mb-6 flex flex-wrap gap-3">
-        <button className="flex items-center gap-2 rounded-lg bg-pink px-4 py-2 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95">
+        <button className="flex items-center gap-2 rounded-lg bg-pink px-4 py-2 text-sm font-medium text-ink-strong transition-transform hover:scale-[1.03] active:scale-95">
           <Terminal size={15} /> /standup
         </button>
         <button className="flex items-center gap-2 rounded-lg border border-pink/40 bg-pink/10 px-4 py-2 text-sm font-medium text-pink transition-colors hover:bg-pink/20">
@@ -27,7 +27,7 @@ export default function WarRoomPage() {
       </div>
 
       <Card className="p-0">
-        <div className="border-b border-border px-5 py-3 font-mono text-xs text-cream-faint">
+        <div className="border-b border-border px-5 py-3 font-mono text-xs text-ink-faint">
           /standup · {new Date().toISOString().slice(0, 10)} · morning report
         </div>
         <div className="divide-y divide-border">
@@ -35,23 +35,23 @@ export default function WarRoomPage() {
             <div key={r.agent} className="grid grid-cols-[90px_1fr] gap-4 px-5 py-4 sm:grid-cols-[90px_1fr_1fr_1fr]">
               <div className="font-mono text-sm text-pink">{r.agent}</div>
               <div className="text-[12px]">
-                <span className="text-cream-faint">wrapped · </span>
-                <span className="text-cream">{r.wrapped}</span>
+                <span className="text-ink-faint">wrapped · </span>
+                <span className="text-ink">{r.wrapped}</span>
               </div>
               <div className="text-[12px]">
-                <span className="text-cream-faint">queued · </span>
-                <span className="text-cream">{r.queued}</span>
+                <span className="text-ink-faint">queued · </span>
+                <span className="text-ink">{r.queued}</span>
               </div>
               <div className="text-[12px]">
-                <span className="text-cream-faint">blocked · </span>
-                <span className={r.blocked === "—" ? "text-cream-dim" : "text-warn"}>
+                <span className="text-ink-faint">blocked · </span>
+                <span className={r.blocked === "—" ? "text-ink-dim" : "text-warn"}>
                   {r.blocked}
                 </span>
               </div>
             </div>
           ))}
         </div>
-        <div className="border-t border-border bg-pink/5 px-5 py-4 text-sm text-cream">
+        <div className="border-t border-border bg-pink/5 px-5 py-4 text-sm text-ink">
           <span className="font-mono text-pink">Main · consolidated · </span>
           Two real blockers: brand sign-off on the newsletter and the missing Q2
           housing CSV. Everything else is on track for the weekly ship.

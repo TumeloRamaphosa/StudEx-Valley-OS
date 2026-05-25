@@ -12,10 +12,10 @@ export function PageHeader({
   return (
     <div className="mb-6 flex items-end justify-between gap-4">
       <div>
-        <h1 className="font-mono text-2xl text-cream-bright tracking-tight">
+        <h1 className="font-mono text-2xl text-ink-strong tracking-tight">
           {title}
         </h1>
-        <p className="mt-1 text-sm text-cream-dim">{subtitle}</p>
+        <p className="mt-1 text-sm text-ink-dim">{subtitle}</p>
       </div>
       {action}
     </div>
@@ -39,7 +39,7 @@ const TONES = {
   running: "text-pink border-pink/40 bg-pink/10",
   done: "text-done border-done/40 bg-done/10",
   warn: "text-warn border-warn/40 bg-warn/10",
-  muted: "text-cream-dim border-border bg-surface-2",
+  muted: "text-ink-dim border-border bg-surface-2",
 } as const;
 
 export function Badge({
@@ -72,13 +72,13 @@ export function Stat({
 }) {
   return (
     <Card className="flex flex-col gap-1">
-      <span className="text-[11px] uppercase tracking-[0.16em] text-cream-faint">
+      <span className="text-[11px] uppercase tracking-[0.16em] text-ink-faint">
         {label}
       </span>
-      <span className="font-mono text-2xl text-cream-bright text-glow">
+      <span className="font-mono text-2xl text-ink-strong text-glow">
         {value}
       </span>
-      {hint && <span className="text-[11px] text-cream-dim">{hint}</span>}
+      {hint && <span className="text-[11px] text-ink-dim">{hint}</span>}
     </Card>
   );
 }

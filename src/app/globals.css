@@ -2,38 +2,44 @@
 
 /* ============================================================
    StudEx Valley OS — ClaudeClaw Mission Control
-   Brand: Neon Pink · Cream White · Dark YAML Terminal
+   Brand: "Daylight Neon" — Cream paper · Neon Pink · Gold · dark ink
    ============================================================ */
 
 :root {
-  /* Surfaces — deep YAML/terminal base */
-  --bg: #0b0b0d;
-  --surface: #141418;
-  --surface-2: #1c1c22;
-  --surface-3: #24242c;
-  --border: #2c2c36;
-  --border-soft: #222229;
+  /* Surfaces — daylight cream paper */
+  --bg: #fbf6e9;
+  --surface: #fffdf7;
+  --surface-2: #f3ebd7;
+  --surface-3: #eaddc2;
+  --border: #e4d8bc;
+  --border-soft: #efe7d3;
+
+  /* Ink — warm dark text */
+  --ink: #2b2620;
+  --ink-strong: #15110c;
+  --ink-dim: #6e6757;
+  --ink-faint: #a59a7e;
 
   /* Neon pink — primary accent */
   --pink: #ff2ec4;
   --pink-bright: #ff5cd6;
-  --pink-dim: #b51f8c;
-  --pink-glow: rgba(255, 46, 196, 0.45);
+  --pink-dim: #d11f92;
+  --pink-glow: rgba(255, 46, 196, 0.30);
 
-  /* Cream white — text + light surfaces */
-  --cream: #f6edd8;
-  --cream-bright: #fdf8ec;
-  --cream-dim: #a8a08c;
-  --cream-faint: #6f6a5d;
+  /* Gold — secondary accent (logo) */
+  --gold: #c9a84c;
+  --gold-bright: #e2c269;
+  --gold-dim: #a4842f;
+  --gold-glow: rgba(201, 168, 76, 0.30);
 
   /* Status */
-  --queued: #8b86f5;
+  --queued: #6c5ce7;
   --running: #ff2ec4;
-  --done: #4fd6a8;
-  --warn: #ffb454;
+  --done: #12936a;
+  --warn: #c98a2c;
 
   --background: var(--bg);
-  --foreground: var(--cream);
+  --foreground: var(--ink);
 }
 
 @theme inline {
@@ -43,13 +49,16 @@
   --color-surface-3: var(--surface-3);
   --color-border: var(--border);
   --color-border-soft: var(--border-soft);
+  --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
   --color-pink: var(--pink);
   --color-pink-bright: var(--pink-bright);
   --color-pink-dim: var(--pink-dim);
-  --color-cream: var(--cream);
-  --color-cream-bright: var(--cream-bright);
-  --color-cream-dim: var(--cream-dim);
-  --color-cream-faint: var(--cream-faint);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-dim: var(--gold-dim);
   --color-queued: var(--queued);
   --color-running: var(--running);
   --color-done: var(--done);
@@ -66,61 +75,60 @@
 
 body {
   background: var(--bg);
-  color: var(--cream);
+  color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient neon glow blobs */
+/* Ambient daylight glow blobs (pink + gold, soft) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(600px circle at 12% 8%, rgba(255, 46, 196, 0.10), transparent 55%),
-    radial-gradient(700px circle at 88% 92%, rgba(139, 134, 245, 0.08), transparent 55%);
+    radial-gradient(680px circle at 10% 4%, rgba(255, 46, 196, 0.10), transparent 55%),
+    radial-gradient(760px circle at 92% 96%, rgba(201, 168, 76, 0.14), transparent 55%);
   pointer-events: none;
 }
 
-/* Faint terminal scanlines */
+/* Faint warm dot-grid texture */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 2px,
-    rgba(0, 0, 0, 0.18) 3px,
-    transparent 4px
-  );
-  opacity: 0.35;
+  background-image: radial-gradient(rgba(43, 38, 32, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.6;
   pointer-events: none;
 }
 
 @layer utilities {
   .glow-pink {
-    box-shadow: 0 0 0 1px var(--pink-dim), 0 0 18px -2px var(--pink-glow);
+    box-shadow: 0 0 0 1px var(--pink), 0 12px 30px -14px var(--pink-glow);
+  }
+  .glow-gold {
+    box-shadow: 0 0 0 1px var(--gold), 0 12px 30px -14px var(--gold-glow);
   }
   .text-glow {
-    text-shadow: 0 0 12px var(--pink-glow);
-  }
-  .ring-pink {
-    box-shadow: 0 0 0 1px var(--pink);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   }
   .surface-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 0.75rem;
+    box-shadow: 0 1px 2px rgba(20, 16, 8, 0.04), 0 10px 28px -20px rgba(20, 16, 8, 0.18);
   }
   .grain {
-    background-image: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    background-image: linear-gradient(135deg, #fffdf7 0%, #f0e6cd 100%);
+  }
+  .grain-gold {
+    background-image: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-dim) 100%);
   }
   .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background: var(--surface-3);
@@ -129,11 +137,15 @@ body::after {
   .scrollbar-thin::-webkit-scrollbar-track {
     background: transparent;
   }
+  .pixelated {
+    image-rendering: pixelated;
+    shape-rendering: crispEdges;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 1px var(--pink-dim), 0 0 14px -4px var(--pink-glow); }
-  50%      { box-shadow: 0 0 0 1px var(--pink), 0 0 26px 0px var(--pink-glow); }
+  0%, 100% { box-shadow: 0 0 0 1px var(--pink), 0 10px 24px -14px var(--pink-glow); }
+  50%      { box-shadow: 0 0 0 1px var(--pink-bright), 0 14px 34px -10px var(--pink-glow); }
 }
 .animate-pulse-glow {
   animation: pulse-glow 2.4s ease-in-out infinite;
@@ -148,4 +160,12 @@ body::after {
   color: var(--pink);
   animation: blink 1s steps(1) infinite;
   margin-left: 2px;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.animate-bob {
+  animation: bob 3.2s ease-in-out infinite;
 }

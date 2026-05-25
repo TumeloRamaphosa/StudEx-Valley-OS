@@ -10,14 +10,17 @@ An AI operating system: a swarm of Claude agents you steer from one
 dashboard. Tasks flow **Queued → Running → Done**; untargeted tasks
 auto-route to the best agent.
 
-## Brand (non-negotiable)
+## Brand — "Daylight Neon"
 
+- **Cream paper** base `#FBF6E9` — light, warm, daylight surfaces.
 - **Neon pink** `#FF2EC4` — primary accent, glow, focus.
-- **Cream white** `#F6EDD8` — text and light surfaces.
-- **Dark YAML** base `#0B0B0D` — terminal/editor feel, scanlines.
+- **Gold** `#C9A84C` — secondary accent + the logo (gold arch + sun on a dark tile).
+- **Ink** `#15110C / #2B2620` — warm near-black text.
 - Mono = JetBrains Mono (system, ids, code). Sans = Space Grotesk (prose).
 - Tokens live in `src/app/globals.css`. Never hardcode hex in components —
-  use the `pink` / `cream` / `surface` Tailwind tokens.
+  use the `pink` / `gold` / `ink` / `surface` Tailwind tokens.
+- Logo: `src/components/logo.tsx`. Agent avatars: blocky pixel-art mechs in
+  `src/components/pixel-mech.tsx`, one color-themed palette per agent.
 
 ## Layout
 
