@@ -19,7 +19,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "StudEx Valley OS — Mission Control",
   description:
-    "ClaudeClaw Hive Mind. Agents, memory, scheduler and war room — one dashboard.",
+    "ClaudeClaw StudEx Mind. Agents, memory, scheduler and war room — one dashboard.",
 };
 
 export default function RootLayout({

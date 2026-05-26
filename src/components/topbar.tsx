@@ -22,7 +22,7 @@ export function Topbar() {
           </kbd>
         </div>
 
-        <button className="flex items-center gap-2 rounded-lg bg-pink px-3 py-2 text-sm font-medium text-ink-strong transition-transform hover:scale-[1.03] active:scale-95">
+        <button className="flex items-center gap-2 rounded-lg bg-pink px-3 py-2 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95">
           <Plus size={15} />
           New task
         </button>

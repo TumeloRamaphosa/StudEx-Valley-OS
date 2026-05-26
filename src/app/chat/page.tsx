@@ -51,7 +51,7 @@ export default function ChatPage() {
             placeholder="Message the hive mind…"
             className="flex-1 rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm text-ink outline-none placeholder:text-ink-faint focus:ring-pink"
           />
-          <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-pink text-ink-strong transition-transform hover:scale-105 active:scale-95">
+          <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-pink text-bg transition-transform hover:scale-105 active:scale-95">
             <Send size={16} />
           </button>
         </div>

@@ -48,8 +48,8 @@ export default function StudExMindPage() {
                 x2={p2.x}
                 y2={p2.y}
                 stroke="#ff2ec4"
-                strokeOpacity="0.35"
-                strokeWidth="0.4"
+                strokeOpacity="0.6"
+                strokeWidth="0.5"
               />
             );
           })}
@@ -59,23 +59,23 @@ export default function StudExMindPage() {
                 cx={n.x}
                 cy={n.y}
                 r={n.r / 6 + 2}
-                fill="#ff2ec4"
+                fill="#39ffaa"
                 fillOpacity="0.12"
               />
               <circle
                 cx={n.x}
                 cy={n.y}
                 r={n.r / 8 + 1.4}
-                fill={n.id === "Main" ? "#ff2ec4" : "#fffdf7"}
-                stroke={n.id === "Main" ? "#d11f92" : "#c9a84c"}
-                strokeWidth="0.6"
+                fill={n.id === "Main" ? "#ff2ec4" : "#0c1014"}
+                stroke={n.id === "Main" ? "#ff66d8" : "#39ffaa"}
+                strokeWidth="0.7"
               />
               <text
                 x={n.x}
                 y={n.y + n.r / 8 + 5}
                 textAnchor="middle"
                 fontSize="2.6"
-                fill="#15110c"
+                fill="#5bf4a6"
                 fontFamily="monospace"
               >
                 {n.id}

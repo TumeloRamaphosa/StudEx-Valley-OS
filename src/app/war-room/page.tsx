@@ -18,7 +18,7 @@ export default function WarRoomPage() {
       />
 
       <div className="mb-6 flex flex-wrap gap-3">
-        <button className="flex items-center gap-2 rounded-lg bg-pink px-4 py-2 text-sm font-medium text-ink-strong transition-transform hover:scale-[1.03] active:scale-95">
+        <button className="flex items-center gap-2 rounded-lg bg-pink px-4 py-2 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95">
           <Terminal size={15} /> /standup
         </button>
         <button className="flex items-center gap-2 rounded-lg border border-pink/40 bg-pink/10 px-4 py-2 text-sm font-medium text-pink transition-colors hover:bg-pink/20">

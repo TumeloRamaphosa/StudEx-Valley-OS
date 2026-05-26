@@ -2,41 +2,46 @@
 
 /* ============================================================
    StudEx Valley OS — ClaudeClaw Mission Control
-   Brand: "Daylight Neon" — Cream paper · Neon Pink · Gold · dark ink
+   Brand: "Cyberpunk Terminal" — hero backdrop · neon-pink headers ·
+   neon-green code body · dark glass panels
    ============================================================ */
 
 :root {
-  /* Surfaces — daylight cream paper */
-  --bg: #fbf6e9;
-  --surface: #fffdf7;
-  --surface-2: #f3ebd7;
-  --surface-3: #eaddc2;
-  --border: #e4d8bc;
-  --border-soft: #efe7d3;
+  /* Surfaces — dark glass over the hero image */
+  --bg: #070a0c;
+  --surface: rgba(10, 14, 17, 0.72);
+  --surface-2: rgba(20, 26, 30, 0.78);
+  --surface-3: rgba(32, 40, 46, 0.85);
+  --border: rgba(57, 255, 170, 0.22);
+  --border-soft: rgba(57, 255, 170, 0.12);
 
-  /* Ink — warm dark text */
-  --ink: #2b2620;
-  --ink-strong: #15110c;
-  --ink-dim: #6e6757;
-  --ink-faint: #a59a7e;
+  /* Text — neon green body, neon pink headers */
+  --ink: #5bf4a6;        /* neon-green body, readable */
+  --ink-strong: #ff2ec4; /* neon-pink headers / emphasis */
+  --ink-dim: #3fb784;    /* dim green */
+  --ink-faint: #5e8c78;  /* faint muted green */
 
   /* Neon pink — primary accent */
   --pink: #ff2ec4;
-  --pink-bright: #ff5cd6;
-  --pink-dim: #d11f92;
-  --pink-glow: rgba(255, 46, 196, 0.30);
+  --pink-bright: #ff66d8;
+  --pink-dim: #c01f93;
+  --pink-glow: rgba(255, 46, 196, 0.55);
 
-  /* Gold — secondary accent (logo) */
+  /* Neon green — secondary accent */
+  --green: #39ffaa;
+  --green-glow: rgba(57, 255, 170, 0.5);
+
+  /* Gold — logo only */
   --gold: #c9a84c;
   --gold-bright: #e2c269;
   --gold-dim: #a4842f;
-  --gold-glow: rgba(201, 168, 76, 0.30);
+  --gold-glow: rgba(201, 168, 76, 0.4);
 
   /* Status */
-  --queued: #6c5ce7;
+  --queued: #8a6bff;
   --running: #ff2ec4;
-  --done: #12936a;
-  --warn: #c98a2c;
+  --done: #39ffaa;
+  --warn: #ffcf4a;
 
   --background: var(--bg);
   --foreground: var(--ink);
@@ -56,6 +61,7 @@
   --color-pink: var(--pink);
   --color-pink-bright: var(--pink-bright);
   --color-pink-dim: var(--pink-dim);
+  --color-green: var(--green);
   --color-gold: var(--gold);
   --color-gold-bright: var(--gold-bright);
   --color-gold-dim: var(--gold-dim);
@@ -73,55 +79,68 @@
   border-color: var(--border);
 }
 
-body {
+html {
   background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient daylight glow blobs (pink + gold, soft) */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
+body {
+  /* Hero backdrop, dark cyberpunk scrim on top so neon text reads.
+     Drop the artwork at /public/studex-hero.jpg */
   background:
-    radial-gradient(680px circle at 10% 4%, rgba(255, 46, 196, 0.10), transparent 55%),
-    radial-gradient(760px circle at 92% 96%, rgba(201, 168, 76, 0.14), transparent 55%);
-  pointer-events: none;
+    linear-gradient(180deg, rgba(6, 9, 11, 0.82) 0%, rgba(6, 9, 11, 0.88) 45%, rgba(6, 9, 11, 0.94) 100%),
+    url("/studex-hero.jpg") center top / cover no-repeat fixed,
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font-mono), ui-monospace, "JetBrains Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.01em;
 }
 
-/* Faint warm dot-grid texture */
+/* Neon scanlines + grid — cyberpunk texture */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(rgba(43, 38, 32, 0.05) 1px, transparent 1px);
-  background-size: 22px 22px;
-  opacity: 0.6;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(57, 255, 170, 0.05) 0px, rgba(57, 255, 170, 0.05) 1px, transparent 1px, transparent 3px),
+    linear-gradient(rgba(255, 46, 196, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 170, 0.06) 1px, transparent 1px);
+  background-size: 100% 3px, 40px 40px, 40px 40px;
+  opacity: 0.5;
   pointer-events: none;
+}
+
+h1, h2, h3 {
+  color: var(--ink-strong);
 }
 
 @layer utilities {
   .glow-pink {
-    box-shadow: 0 0 0 1px var(--pink), 0 12px 30px -14px var(--pink-glow);
+    box-shadow: 0 0 0 1px var(--pink), 0 0 22px -4px var(--pink-glow);
+  }
+  .glow-green {
+    box-shadow: 0 0 0 1px var(--green), 0 0 22px -4px var(--green-glow);
   }
   .glow-gold {
-    box-shadow: 0 0 0 1px var(--gold), 0 12px 30px -14px var(--gold-glow);
+    box-shadow: 0 0 0 1px var(--gold), 0 0 20px -4px var(--gold-glow);
   }
   .text-glow {
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px var(--pink-glow);
+  }
+  .text-glow-green {
+    text-shadow: 0 0 10px var(--green-glow);
   }
   .surface-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 0.75rem;
-    box-shadow: 0 1px 2px rgba(20, 16, 8, 0.04), 0 10px 28px -20px rgba(20, 16, 8, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(57, 255, 170, 0.08) inset, 0 12px 34px -18px rgba(0, 0, 0, 0.8);
   }
   .grain {
-    background-image: linear-gradient(135deg, #fffdf7 0%, #f0e6cd 100%);
+    background-image: linear-gradient(135deg, rgba(255, 46, 196, 0.18), rgba(57, 255, 170, 0.14));
   }
   .grain-gold {
     background-image: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-dim) 100%);
@@ -144,8 +163,8 @@ body::after {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 1px var(--pink), 0 10px 24px -14px var(--pink-glow); }
-  50%      { box-shadow: 0 0 0 1px var(--pink-bright), 0 14px 34px -10px var(--pink-glow); }
+  0%, 100% { box-shadow: 0 0 0 1px var(--pink), 0 0 16px -4px var(--pink-glow); }
+  50%      { box-shadow: 0 0 0 1px var(--pink-bright), 0 0 28px -2px var(--pink-glow); }
 }
 .animate-pulse-glow {
   animation: pulse-glow 2.4s ease-in-out infinite;
@@ -157,7 +176,7 @@ body::after {
 }
 .caret::after {
   content: "▋";
-  color: var(--pink);
+  color: var(--green);
   animation: blink 1s steps(1) infinite;
   margin-left: 2px;
 }
