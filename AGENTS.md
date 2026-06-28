@@ -35,7 +35,11 @@ auto-route to the best agent.
 
 `/goal` (persistent objective, Stop hook in `.claude/settings.json`) ·
 `gstack` (browser QA) · `ui-ux-pro-max` + `claudedesignskills` (design
-intelligence) · `graphify` (Hive Mind graphs) · `superpowers`.
+intelligence) · `graphify` (Hive Mind graphs) · `superpowers` ·
+`huashu-design` (HTML-native hi-fi prototypes, slide decks, animations,
+MP4/GIF export, 20 design philosophies + 5-dimensional expert review —
+invoke with `/huashu-design` or trigger words like "做原型", "prototype",
+"make an animation", "design variant", "hi-fi mockup").
 
 ## Conventions
 
