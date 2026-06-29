@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { NAV } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
+import { InkSeal, BrushStroke } from "@/components/ink-seal";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -58,6 +59,29 @@ export function Sidebar() {
           );
         })}
       </nav>
+
+      {/* 水墨 calligraphy mark — seal + vertical characters */}
+      <div className="px-4 pb-2">
+        <BrushStroke width={160} color="#39ffaa" opacity={0.12} />
+        <div className="mt-3 flex items-center gap-3">
+          <InkSeal size={38} className="shrink-0 glow-vermilion rounded-sm" />
+          <div
+            className="writing-vertical text-[11px] font-mono tracking-[0.22em] text-ink-faint leading-none"
+            style={{ letterSpacing: "0.3em" }}
+            lang="zh-Hant"
+          >
+            學流系統
+          </div>
+          <div
+            className="writing-vertical text-[10px] tracking-widest ml-auto"
+            style={{ color: "var(--vermilion)", opacity: 0.55 }}
+            lang="zh-Hant"
+          >
+            任務控制
+          </div>
+        </div>
+        <BrushStroke width={160} color="#ff2ec4" opacity={0.09} className="mt-2" />
+      </div>
 
       <div className="p-4 border-t border-border">
         <div className="rounded-lg grain p-3 text-[11px] text-ink-dim">

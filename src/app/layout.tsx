@@ -3,6 +3,7 @@ import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/sidebar";
 import { Topbar } from "@/components/topbar";
+import { InkSVGDefs, InkWashFog } from "@/components/ink-seal";
 
 const sans = Space_Grotesk({
   variable: "--font-sans",
@@ -31,6 +32,8 @@ export default function RootLayout({
       className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        <InkSVGDefs />
+        <InkWashFog />
         <div className="flex min-h-screen">
           <Sidebar />
           <div className="flex flex-1 flex-col min-w-0">

@@ -31,6 +31,10 @@
   --green: #39ffaa;
   --green-glow: rgba(57, 255, 170, 0.5);
 
+  /* Vermilion — seal / chop accent */
+  --vermilion: #c41230;
+  --vermilion-glow: rgba(196, 18, 48, 0.45);
+
   /* Gold — logo only */
   --gold: #c9a84c;
   --gold-bright: #e2c269;
@@ -63,6 +67,7 @@
   --color-pink-dim: var(--pink-dim);
   --color-green: var(--green);
   --color-gold: var(--gold);
+  --color-vermilion: var(--vermilion);
   --color-gold-bright: var(--gold-bright);
   --color-gold-dim: var(--gold-dim);
   --color-queued: var(--queued);
@@ -159,6 +164,21 @@ h1, h2, h3 {
   .pixelated {
     image-rendering: pixelated;
     shape-rendering: crispEdges;
+  }
+}
+
+@layer utilities {
+  .glow-vermilion {
+    box-shadow: 0 0 0 1px var(--vermilion), 0 0 18px -4px var(--vermilion-glow);
+  }
+  /* Ink-wash card edge — applies the ink-edge SVG filter from InkSVGDefs */
+  .ink-edge {
+    filter: url(#ink-edge);
+  }
+  /* Vertical Chinese calligraphy text */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
   }
 }
 

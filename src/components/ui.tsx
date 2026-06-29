@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { InkSeal } from "@/components/ink-seal";
 
 export function PageHeader({
   title,
@@ -11,11 +12,18 @@ export function PageHeader({
 }) {
   return (
     <div className="mb-6 flex items-end justify-between gap-4">
-      <div>
-        <h1 className="font-mono text-2xl text-ink-strong tracking-tight">
-          {title}
-        </h1>
-        <p className="mt-1 text-sm text-ink-dim">{subtitle}</p>
+      <div className="flex items-start gap-3">
+        {/* Vermilion seal — authority stamp beside each section title */}
+        <InkSeal
+          size={28}
+          className="shrink-0 mt-0.5 glow-vermilion rounded-sm opacity-80"
+        />
+        <div>
+          <h1 className="font-mono text-2xl text-ink-strong tracking-tight">
+            {title}
+          </h1>
+          <p className="mt-1 text-sm text-ink-dim">{subtitle}</p>
+        </div>
       </div>
       {action}
     </div>

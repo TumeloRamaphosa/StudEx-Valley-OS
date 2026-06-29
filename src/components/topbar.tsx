@@ -1,6 +1,7 @@
 "use client";
 
 import { Search, Power, Plus } from "lucide-react";
+import { BrushStroke } from "@/components/ink-seal";
 
 export function Topbar() {
   return (
@@ -33,6 +34,10 @@ export function Topbar() {
         >
           <Power size={15} />
         </button>
+      </div>
+      {/* Ink-brush divider beneath topbar — ghost mark */}
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full overflow-hidden" aria-hidden>
+        <BrushStroke width={900} color="#39ffaa" opacity={0.06} />
       </div>
     </header>
   );
