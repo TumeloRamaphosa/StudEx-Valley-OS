@@ -7,7 +7,9 @@ import {
   Cpu, Globe, Shield, Zap, Snowflake, Star, Radio,
   Activity, Users, TrendingUp, Clock, Server, Wifi,
   ChevronRight, AlertTriangle, CheckCircle2, Loader2,
-  Eye, Lock, Database, Bot, Layers,
+  Eye, Lock, Database, Bot, Layers, Send, Play, Network,
+  LineChart, RadioTower, Package, Building2, Thermometer,
+  ArrowRight, ZapOff, Scan, Broadcast,
 } from "lucide-react";
 
 // ─── Glitch Text Effect ───────────────────────────────────────────────────────
@@ -183,29 +185,14 @@ function AlgorithmicCow() {
     );
   }, [frame]);
 
-  const cowPattern = [
-    [0,0,1,1,0,0,0,0,1,1,0,0],
-    [0,1,2,2,1,0,0,1,2,2,1,0],
-    [0,1,2,2,1,0,0,1,2,2,1,0],
-    [0,0,1,1,0,1,1,0,1,1,0,0],
-    [0,0,0,0,1,1,1,1,0,0,0,0],
-    [0,1,1,0,1,1,1,1,0,1,1,0],
-    [1,1,1,1,1,1,1,1,1,1,1,1],
-  ];
-
   return (
     <div className="relative">
-      {/* SVG cow head */}
       <svg viewBox="0 0 120 100" width="120" height="100">
-        {/* Head base */}
         <ellipse cx="60" cy="55" rx="35" ry="30" fill="none" stroke="#c9a84c" strokeWidth="1.5" opacity="0.8" />
-        {/* Ears */}
         <ellipse cx="28" cy="35" rx="10" ry="7" fill="none" stroke="#c9a84c" strokeWidth="1" opacity="0.6" />
         <ellipse cx="92" cy="35" rx="10" ry="7" fill="none" stroke="#c9a84c" strokeWidth="1" opacity="0.6" />
-        {/* Horns */}
         <path d="M 25 30 Q 15 20 20 10" fill="none" stroke="#c9a84c" strokeWidth="1.5" opacity="0.8" />
         <path d="M 95 30 Q 105 20 100 10" fill="none" stroke="#c9a84c" strokeWidth="1.5" opacity="0.8" />
-        {/* Spots (algorithmic) */}
         {[[35,45],[75,50],[50,60],[65,40],[40,65]].map(([cx,cy], i) => (
           <circle
             key={i}
@@ -213,25 +200,20 @@ function AlgorithmicCow() {
             fill="#ff2ec4" opacity={0.3 + Math.sin(frame * 0.1 + i) * 0.15}
           />
         ))}
-        {/* Eyes */}
         <circle cx="48" cy="50" r={3 + Math.sin(frame * 0.15) * 0.5} fill="#ff2ec4" opacity="0.9" />
         <circle cx="72" cy="50" r={3 + Math.cos(frame * 0.15) * 0.5} fill="#ff2ec4" opacity="0.9" />
         <circle cx="48" cy="50" r="1" fill="white" />
         <circle cx="72" cy="50" r="1" fill="white" />
-        {/* Nostrils */}
         <ellipse cx="52" cy="72" rx="4" ry="3" fill="none" stroke="#ff2ec4" strokeWidth="1" opacity="0.7" />
         <ellipse cx="68" cy="72" rx="4" ry="3" fill="none" stroke="#ff2ec4" strokeWidth="1" opacity="0.7" />
-        {/* Glow */}
         <ellipse cx="60" cy="55" rx="40" ry="35" fill="none" stroke="#ff2ec4" strokeWidth="0.5" opacity="0.3"
           style={{ filter: "blur(3px)" }} />
-        {/* Scan line */}
         <line
           x1="25" y1={25 + (frame % 50)}
           x2="95" y2={25 + (frame % 50)}
           stroke="#39ffaa" strokeWidth="0.5" opacity="0.5"
         />
       </svg>
-      {/* Particles */}
       {particles.map((p, i) => (
         <div
           key={i}
@@ -276,6 +258,569 @@ const AGENTS_ACTIVE = [
   { name: "Pipeline Tracker", task: "SA-Russia deal pipeline sync", status: "running" },
   { name: "Cold Chain Monitor", task: "Rwanda storage temp check", status: "idle" },
 ];
+
+// ─── Africa Map Component ───────────────────────────────────────────────────
+
+const AFRICA_HUBS = [
+  { name: "JHB", city: "Johannesburg", country: "South Africa", x: 52, y: 75, size: 12, pulse: 1.5 },
+  { name: "CPT", city: "Cape Town", country: "South Africa", x: 50, y: 82, size: 7, pulse: 1.0 },
+  { name: "GBE", city: "Gaborone", country: "Botswana", x: 51, y: 72, size: 6, pulse: 0.8 },
+  { name: "HRE", city: "Harare", country: "Zimbabwe", x: 57, y: 58, size: 6, pulse: 0.8 },
+  { name: "MPM", city: "Maputo", country: "Mozambique", x: 59, y: 66, size: 6, pulse: 0.8 },
+  { name: "MBS", city: "Mbabane", country: "Eswatini", x: 54, y: 73, size: 5, pulse: 0.7 },
+  { name: "WDH", city: "Windhoek", country: "Namibia", x: 48, y: 70, size: 5, pulse: 0.7 },
+  { name: "KGL", city: "Kigali", country: "Rwanda", x: 61, y: 48, size: 6, pulse: 0.8 },
+  { name: "LOS", city: "Lagos", country: "Nigeria", x: 43, y: 42, size: 8, pulse: 1.2 },
+  { name: "NBO", city: "Nairobi", country: "Kenya", x: 65, y: 44, size: 7, pulse: 1.0 },
+  { name: "LUN", city: "Lusaka", country: "Zambia", x: 55, y: 56, size: 6, pulse: 0.8 },
+  { name: "LLW", city: "Lilongwe", country: "Malawi", x: 59, y: 54, size: 5, pulse: 0.7 },
+  { name: "KMP", city: "Kampala", country: "Uganda", x: 63, y: 46, size: 5, pulse: 0.7 },
+  { name: "ACC", city: "Accra", country: "Ghana", x: 41, y: 38, size: 6, pulse: 0.8 },
+  { name: "ADD", city: "Addis Ababa", country: "Ethiopia", x: 68, y: 38, size: 6, pulse: 0.8 },
+  { name: "CAI", city: "Cairo", country: "Egypt", x: 62, y: 22, size: 6, pulse: 0.8 },
+  { name: "CAS", city: "Casablanca", country: "Morocco", x: 38, y: 26, size: 5, pulse: 0.7 },
+  { name: "TUN", city: "Tunis", country: "Tunisia", x: 42, y: 22, size: 5, pulse: 0.7 },
+  { name: "RAI", city: "Praia", country: "Cape Verde", x: 30, y: 36, size: 4, pulse: 0.6 },
+];
+
+function AfricaMap() {
+  const [pulseFrame, setPulseFrame] = useState(0);
+  const jhb = AFRICA_HUBS[0];
+
+  useEffect(() => {
+    const interval = setInterval(() => setPulseFrame((f) => (f + 1) % 60), 100);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div style={{ position: "relative", width: "100%", height: 280 }}>
+      <svg viewBox="0 0 100 100" style={{ width: "100%", height: "100%" }}>
+        <defs>
+          <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="var(--pink)" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="var(--pink)" stopOpacity="0" />
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        {/* Connection lines from JHB to all nodes */}
+        {AFRICA_HUBS.slice(1).map((hub) => (
+          <line
+            key={`line-${hub.name}`}
+            x1={jhb.x}
+            y1={jhb.y}
+            x2={hub.x}
+            y2={hub.y}
+            stroke="var(--pink)"
+            strokeWidth="0.2"
+            strokeOpacity="0.3"
+            strokeDasharray="1,1"
+          />
+        ))}
+        
+        {/* Hub nodes */}
+        {AFRICA_HUBS.map((hub, i) => {
+          const pulseScale = 1 + Math.sin(pulseFrame * 0.1 + i * 0.5) * 0.3 * hub.pulse;
+          const glowOpacity = 0.3 + Math.sin(pulseFrame * 0.1 + i * 0.5) * 0.2;
+          
+          return (
+            <g key={hub.name} filter="url(#glow)">
+              {/* Pulse ring */}
+              <circle
+                cx={hub.x}
+                cy={hub.y}
+                r={hub.size * pulseScale * 2}
+                fill="none"
+                stroke="var(--pink)"
+                strokeWidth="0.3"
+                opacity={glowOpacity * 0.5}
+              />
+              {/* Glow */}
+              <circle
+                cx={hub.x}
+                cy={hub.y}
+                r={hub.size * 1.5}
+                fill="url(#nodeGlow)"
+                opacity={glowOpacity}
+              />
+              {/* Core */}
+              <circle
+                cx={hub.x}
+                cy={hub.y}
+                r={hub.size}
+                fill={i === 0 ? "var(--pink)" : "var(--green)"}
+                opacity="0.9"
+              />
+              {/* Label for JHB */}
+              {i === 0 && (
+                <text
+                  x={hub.x}
+                  y={hub.y + hub.size + 3}
+                  textAnchor="middle"
+                  fill="var(--pink)"
+                  fontSize="2"
+                  fontFamily="JetBrains Mono, monospace"
+                  fontWeight="bold"
+                >
+                  {hub.name}
+                </text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+      
+      {/* Legend */}
+      <div style={{
+        position: "absolute",
+        bottom: 8,
+        right: 8,
+        display: "flex",
+        flexDirection: "column",
+        gap: 4,
+        fontSize: 9,
+        fontFamily: "JetBrains Mono, monospace",
+        color: "var(--ink-faint)",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--pink)", boxShadow: "0 0 4px var(--pink)" }} />
+          <span>HQ (JHB)</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)", boxShadow: "0 0 4px var(--green)" }} />
+          <span>Hub {AFRICA_HUBS.length - 1}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Russia Trade Ticker ───────────────────────────────────────────────────
+
+const RUSSIA_CLIENTS = [
+  { id: "RU-001", name: "Pharmasyntez", products: ["Ledipasvir 90mg", "Sofosbuvir 400mg"], volume: "$2.4M", tenders: 3 },
+  { id: "RU-002", name: "R-Pharm", products: ["Abciximab", "Trastuzumab"], volume: "$1.8M", tenders: 2 },
+  { id: "RU-003", name: "Pharmstandard", products: ["Insulin Glargine", "Dapagliflozin"], volume: "$3.1M", tenders: 4 },
+  { id: "RU-004", name: "Stada CIS", products: ["Atorvastatin", "Rosuvastatin"], volume: "$890K", tenders: 1 },
+];
+
+function RussiaTradeTicker() {
+  const [ticks, setTicks] = useState<{ id: string; text: string; type: string; time: string }[]>([]);
+  const tickRef = useRef<HTMLDivElement>(null);
+
+  const addTick = () => {
+    const messages = [
+      { type: "order", text: "New order confirmed — Pharmasyntez" },
+      { type: "tender", text: "Tender update — R-Pharm active" },
+      { type: "volume", text: "Volume milestone — $8.2M reached" },
+      { type: "alert", text: "Customs clearance — Stada CIS" },
+      { type: "order", text: "Bulk order — Pharmstandard" },
+      { type: "volume", text: "Trade volume +12% MoM" },
+      { type: "tender", text: "New tender — Pharmasyntez" },
+      { type: "alert", text: "Quote sent — R-Pharm" },
+    ];
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    const time = new Date().toLocaleTimeString("en-ZA", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    
+    setTicks((prev) => [...prev.slice(-15), { id: `${Date.now()}-${Math.random()}`, text: msg.text, type: msg.type, time }]);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(addTick, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+        <RadioTower size={14} style={{ color: "#ff4444", animation: "pulse 1s infinite" }} />
+        <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "#ff4444", fontWeight: "bold" }}>
+          RUSSIA BRIDGE — LIVE FEED
+        </span>
+        <div style={{
+          width: 6,
+          height: 6,
+          borderRadius: "50%",
+          background: "#ff4444",
+          animation: "blink 0.8s infinite",
+          boxShadow: "0 0 6px #ff4444",
+        }} />
+      </div>
+      
+      {/* Client panels */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8, marginBottom: 12 }}>
+        {RUSSIA_CLIENTS.map((client) => (
+          <div key={client.id} style={{
+            padding: 10,
+            borderRadius: 8,
+            border: "1px solid var(--border-soft)",
+            background: "var(--surface-2)",
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--ink)", fontWeight: "bold" }}>
+                {client.name}
+              </span>
+              <Badge tone="done" style={{ fontSize: 8 }}>{client.tenders} tenders</Badge>
+            </div>
+            <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "var(--ink-faint)", marginBottom: 4 }}>
+              {client.products.join(", ")}
+            </div>
+            <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "#ff4444", fontWeight: "bold" }}>
+              {client.volume}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Ticker feed */}
+      <div ref={tickRef} style={{
+        height: 100,
+        overflow: "hidden",
+        borderRadius: 8,
+        border: "1px solid rgba(255,68,68,0.3)",
+        background: "rgba(255,68,68,0.05)",
+        padding: 8,
+      }}>
+        <style>{`
+          @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        `}</style>
+        {ticks.map((tick) => (
+          <div key={tick.id} style={{
+            display: "flex",
+            gap: 8,
+            padding: "4px 0",
+            borderBottom: "1px solid rgba(255,68,68,0.1)",
+            animation: "fadeIn 0.3s ease-out",
+          }}>
+            <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "var(--ink-faint)" }}>
+              [{tick.time}]
+            </span>
+            <span style={{
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 9,
+              color: tick.type === "order" ? "#39ffaa" : tick.type === "volume" ? "var(--gold)" : tick.type === "alert" ? "#ff4444" : "var(--pink)",
+            }}>
+              {tick.text}
+            </span>
+          </div>
+        ))}
+        {ticks.length === 0 && (
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "var(--ink-faint)", textAlign: "center", paddingTop: 30 }}>
+            AWAITING FEED...
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── China Partner Status ──────────────────────────────────────────────────
+
+const CHINA_PARTNERS = [
+  { id: "CN-001", name: "Tencent Cloud", icon: "🐧", apiCalls: 24847, response: 98, status: "connected", lastContact: "2m ago" },
+  { id: "CN-002", name: "ByteDance AI", icon: "🎵", apiCalls: 18234, response: 94, status: "connected", lastContact: "5m ago" },
+  { id: "CN-003", name: "MiniMax", icon: "🧠", apiCalls: 8956, response: 99, status: "connected", lastContact: "12m ago" },
+  { id: "CN-004", name: "Kimi AI", icon: "💬", apiCalls: 15234, response: 97, status: "connected", lastContact: "8m ago" },
+];
+
+function ChinaPartnerStatus() {
+  return (
+    <div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+        <Network size={14} style={{ color: "#ff6b35" }} />
+        <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "var(--ink-strong)", fontWeight: "bold" }}>
+          CHINA PARTNER STATUS
+        </span>
+        <Badge tone="done"><GlitchText className="inline">4 CONNECTED</GlitchText></Badge>
+      </div>
+      
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }}>
+        {CHINA_PARTNERS.map((partner) => (
+          <div key={partner.id} style={{
+            padding: 12,
+            borderRadius: 10,
+            border: "1px solid var(--border)",
+            background: "var(--surface-2)",
+            position: "relative",
+            overflow: "hidden",
+          }}>
+            {/* Status indicator */}
+            <div style={{
+              position: "absolute",
+              top: 8,
+              right: 8,
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              background: "var(--green)",
+              boxShadow: "0 0 8px var(--green)",
+              animation: "pulse 2s infinite",
+            }} />
+            
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <span style={{ fontSize: 24 }}>{partner.icon}</span>
+              <div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--ink)", fontWeight: "bold" }}>
+                  {partner.name}
+                </div>
+                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 8, color: "var(--ink-faint)" }}>
+                  {partner.lastContact}
+                </div>
+              </div>
+            </div>
+            
+            {/* API Calls */}
+            <div style={{ marginBottom: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
+                <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 8, color: "var(--ink-faint)" }}>API Calls</span>
+                <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "#ff6b35", fontWeight: "bold" }}>
+                  {partner.apiCalls.toLocaleString()}
+                </span>
+              </div>
+              <div style={{ height: 4, background: "var(--border)", borderRadius: 2, overflow: "hidden" }}>
+                <div style={{
+                  width: `${Math.min(100, partner.apiCalls / 300)}%`,
+                  height: "100%",
+                  background: "linear-gradient(90deg, var(--pink), #ff6b35)",
+                  borderRadius: 2,
+                }} />
+              </div>
+            </div>
+            
+            {/* Response time */}
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
+                <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 8, color: "var(--ink-faint)" }}>Response</span>
+                <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "var(--green)" }}>
+                  {partner.response}%
+                </span>
+              </div>
+              <div style={{ height: 4, background: "var(--border)", borderRadius: 2, overflow: "hidden" }}>
+                <div style={{
+                  width: `${partner.response}%`,
+                  height: "100%",
+                  background: "var(--green)",
+                  borderRadius: 2,
+                }} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Quick Actions Grid ────────────────────────────────────────────────────
+
+const QUICK_ACTIONS = [
+  { id: "deploy", name: "Deploy Agent", icon: Bot, color: "var(--pink)", shortcut: "⌘D" },
+  { id: "broadcast", name: "Global Broadcast", icon: Broadcast, color: "#8a6bff", shortcut: "⌘B" },
+  { id: "russia", name: "Russia Bridge", icon: RadioTower, color: "#ff4444", shortcut: "⌘R" },
+  { id: "coldchain", name: "Africa Cold Chain", icon: Thermometer, color: "#39ffaa", shortcut: "⌘C" },
+  { id: "research", name: "Research Brief", icon: Scan, color: "var(--gold)", shortcut: "⌘⇧R" },
+  { id: "outreach", name: "Partner Outreach", icon: Send, color: "#00A3E0", shortcut: "⌘O" },
+];
+
+function QuickActionsGrid() {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  return (
+    <div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+        <Zap size={14} style={{ color: "var(--gold)" }} />
+        <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "var(--ink-strong)", fontWeight: "bold" }}>
+          QUICK ACTIONS
+        </span>
+        <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "var(--ink-faint)", marginLeft: "auto" }}>
+          2077 SYSTEM
+        </span>
+      </div>
+      
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+        {QUICK_ACTIONS.map((action) => {
+          const Icon = action.icon;
+          const isHovered = hoveredId === action.id;
+          
+          return (
+            <button
+              key={action.id}
+              onMouseEnter={() => setHoveredId(action.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                padding: "14px 10px",
+                borderRadius: 10,
+                border: `1px solid ${isHovered ? action.color : "var(--border)"}`,
+                background: isHovered ? `rgba(${action.color === "var(--pink)" ? "255,46,196" : action.color === "#8a6bff" ? "138,107,255" : action.color === "#ff4444" ? "255,68,68" : "57,255,170" }, 0.1)` : "var(--surface-2)",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 6,
+                transition: "all 0.2s ease",
+                transform: isHovered ? "translateY(-2px)" : "none",
+                boxShadow: isHovered ? `0 4px 12px rgba(${action.color === "var(--pink)" ? "255,46,196" : action.color === "#8a6bff" ? "138,107,255" : action.color === "#ff4444" ? "255,68,68" : "57,255,170" }, 0.3)` : "none",
+              }}
+            >
+              <Icon size={20} style={{ color: action.color }} />
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "var(--ink)", fontWeight: 500 }}>
+                {action.name}
+              </span>
+              <span style={{
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: 8,
+                color: "var(--ink-faint)",
+                padding: "2px 4px",
+                borderRadius: 3,
+                background: "var(--border)",
+              }}>
+                {action.shortcut}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Live Clock & System Metrics ───────────────────────────────────────────
+
+function ArcGauge({ value, max, label, color, unit }: { value: number; max: number; label: string; color: string; unit: string }) {
+  const [animated, setAnimated] = useState(0);
+  const percentage = Math.min(100, (animated / max) * 100);
+  const circumference = 2 * Math.PI * 36;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference * 0.75;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimated((a) => {
+        const target = value + (Math.random() - 0.5) * 5;
+        return Math.max(0, Math.min(max, a + (target - a) * 0.1));
+      });
+    }, 500);
+    return () => clearInterval(interval);
+  }, [value, max]);
+
+  return (
+    <div style={{ position: "relative", width: 80, height: 80 }}>
+      <svg viewBox="0 0 80 80" style={{ transform: "rotate(-135deg)" }}>
+        <circle
+          cx="40"
+          cy="40"
+          r="36"
+          fill="none"
+          stroke="var(--border)"
+          strokeWidth="6"
+          strokeDasharray={`${circumference * 0.75} ${circumference * 0.25}`}
+        />
+        <circle
+          cx="40"
+          cy="40"
+          r="36"
+          fill="none"
+          stroke={color}
+          strokeWidth="6"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+          style={{ filter: `drop-shadow(0 0 4px ${color})` }}
+        />
+      </svg>
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: "bold", color: "var(--ink-strong)" }}>
+          {Math.round(percentage)}%
+        </span>
+        <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 7, color: "var(--ink-faint)" }}>
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function LiveClock() {
+  const [time, setTime] = useState(new Date());
+  const [metrics, setMetrics] = useState({ cpu: 34, memory: 67, network: 45 });
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMetrics((m) => ({
+        cpu: Math.max(10, Math.min(90, m.cpu + (Math.random() - 0.5) * 10)),
+        memory: Math.max(40, Math.min(95, m.memory + (Math.random() - 0.5) * 5)),
+        network: Math.max(20, Math.min(80, m.network + (Math.random() - 0.5) * 15)),
+      }));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const timeStr = time.toLocaleTimeString("en-ZA", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  const dateStr = time.toLocaleDateString("en-ZA", { weekday: "short", day: "2-digit", month: "short", year: "numeric" });
+
+  return (
+    <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      {/* Clock */}
+      <div style={{
+        textAlign: "center",
+        padding: "16px 20px",
+        borderRadius: 12,
+        border: "1px solid var(--border)",
+        background: "var(--surface-2)",
+      }}>
+        <div style={{
+          fontFamily: "JetBrains Mono, monospace",
+          fontSize: 28,
+          fontWeight: "bold",
+          color: "var(--pink)",
+          textShadow: "0 0 10px var(--pink-glow)",
+          letterSpacing: 2,
+        }}>
+          {timeStr}
+        </div>
+        <div style={{
+          fontFamily: "JetBrains Mono, monospace",
+          fontSize: 9,
+          color: "var(--ink-faint)",
+          marginTop: 4,
+        }}>
+          SAST · JOHANNESBURG
+        </div>
+        <div style={{
+          fontFamily: "JetBrains Mono, monospace",
+          fontSize: 8,
+          color: "var(--ink-faint)",
+        }}>
+          {dateStr}
+        </div>
+      </div>
+
+      {/* Arc Gauges */}
+      <div style={{ display: "flex", gap: 8 }}>
+        <ArcGauge value={metrics.cpu} max={100} label="CPU" color="var(--pink)" unit="%" />
+        <ArcGauge value={metrics.memory} max={100} label="RAM" color="#8a6bff" unit="%" />
+        <ArcGauge value={metrics.network} max={100} label="NET" color="var(--green)" unit="Mbps" />
+      </div>
+    </div>
+  );
+}
 
 // ─── Main Command Center ───────────────────────────────────────────────────
 
@@ -588,6 +1133,83 @@ export default function CommandCenter() {
             ))}
           </div>
         </div>
+
+        {/* ═══════════════════════════════════════════════════════════════════ */}
+        {/* NEW SECTIONS — 2077 ENHANCEMENTS */}
+        {/* ═══════════════════════════════════════════════════════════════════ */}
+
+        {/* Live Clock & System Metrics */}
+        <div className="mt-6 rounded-2xl border p-5" style={{ borderColor: "var(--green)", background: "var(--surface)" }}>
+          <LiveClock />
+        </div>
+
+        {/* Three-column: Africa Map | Russia Ticker | China Partners */}
+        <div className="mt-6 grid lg:grid-cols-3 gap-6">
+          {/* Africa Map */}
+          <div className="rounded-2xl border p-5" style={{ borderColor: "var(--pink)", background: "var(--surface)" }}>
+            <div className="flex items-center gap-2 mb-4">
+              <Globe size={14} style={{ color: "var(--pink)" }} />
+              <span className="font-mono text-sm font-bold" style={{ color: "var(--ink-strong)" }}>
+                AFRICA NETWORK
+              </span>
+              <Badge tone="done">19 HUBS</Badge>
+            </div>
+            <AfricaMap />
+          </div>
+
+          {/* Russia Trade Ticker */}
+          <div className="rounded-2xl border p-5" style={{ borderColor: "#ff4444", background: "var(--surface)" }}>
+            <RussiaTradeTicker />
+          </div>
+
+          {/* China Partner Status */}
+          <div className="rounded-2xl border p-5" style={{ borderColor: "#ff6b35", background: "var(--surface)" }}>
+            <ChinaPartnerStatus />
+          </div>
+        </div>
+
+        {/* Quick Actions Grid */}
+        <div className="mt-6 rounded-2xl border p-5" style={{ borderColor: "var(--gold)", background: "var(--surface)" }}>
+          <QuickActionsGrid />
+        </div>
+
+        {/* Footer System Status Bar */}
+        <div className="mt-6 flex items-center justify-between px-4 py-3 rounded-xl border" style={{
+          borderColor: "var(--border)",
+          background: "var(--surface)",
+        }}>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: "var(--green)",
+                boxShadow: "0 0 8px var(--green)",
+                animation: "pulse 2s infinite",
+              }} />
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--ink-faint)" }}>
+                CORE SYSTEMS ONLINE
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Network size={12} style={{ color: "var(--green)" }} />
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--ink-faint)" }}>
+                LATENCY: 23ms
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Shield size={12} style={{ color: "var(--green)" }} />
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--ink-faint)" }}>
+                SECURITY: SECURE
+              </span>
+            </div>
+          </div>
+          <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "var(--ink-faint)" }}>
+            STUDEx VALLEY OS v2.0.7 · 2077.07.05
+          </div>
+        </div>
+
       </div>
     </div>
   );
