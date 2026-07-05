@@ -1,0 +1,90 @@
+name: Deploy to Orgo VM + Vercel
+
+on:
+  push:
+    branches:
+      - claude/plan-repo-integration-fag6C
+      - main
+
+jobs:
+  build:
+    name: Build + Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MEMORY_API_KEY: ${{ secrets.MEMORY_API_KEY }}
+          LARK_APP_ID: ${{ secrets.LARK_APP_ID }}
+          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          NEXT_PUBLIC_SUPERMEMORY_API_KEY: ${{ secrets.SUPERMEMORY_API_KEY }}
+        run: npm run build
+
+      - name: Deploy to Vercel (Preview)
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"
+          working-directory: ./
+
+      - name: Deploy to Orgo VM (SSH)
+        if: github.ref == 'refs/heads/claude/plan-repo-integration-fag6C'
+        run: |
+          # Sync dist/ to Orgo VM via rsync over SSH
+          echo "Deploying to Orgo VM..."
+          # Add ORGO_HOST, ORGO_USER, ORGO_SSH_KEY secrets to GitHub repo settings
+          # Then uncomment:
+          # rsync -avz --delete ./out/ \
+          #   -e "ssh -o StrictHostKeyChecking=no" \
+          #   ${{ secrets.ORGO_USER }}@${{ secrets.ORGO_HOST }}:/var/www/studex-valley-os/
+
+  outreach-agent:
+    name: Run Partner Outreach Agent
+    runs-on: ubuntu-latest
+    # Runs every Monday at 08:00 SAST
+    schedule:
+      - cron: "0 6 * * 1"
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Send outreach emails via QwenPaw
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LARK_APP_ID: ${{ secrets.LARK_APP_ID }}
+          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+        run: |
+          pip install -q requests smtplib
+          # QwenPaw outreach agent — sends pre-drafted emails to partners
+          echo "Partner outreach agent running..."
+          # Implementation: call QwenPaw email endpoint with partner list
+          # Partners: Tencent, ByteDance, MiniMax, Kimi, NVIDIA, Google, Anthropic
