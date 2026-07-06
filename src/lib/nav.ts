@@ -12,6 +12,7 @@ import {
   Send,
   Rocket,
   Building2,
+  Heart,
   type LucideIcon,
 } from "lucide-react";
 
@@ -29,6 +30,7 @@ export const NAV: NavItem[] = [
   { href: "/agents-registry", label: "Agent Registry", icon: Users, desc: "All VMs, Lark, Slack, Discord" },
   { href: "/research-hub", label: "Research Hub", icon: Globe, desc: "China AI + Africa pharma intel" },
   { href: "/africa-pharma-hub", label: "Africa Pharma", icon: Building2, desc: "19-country distribution + cold chain" },
+  { href: "/studex-health", label: "Studex Health", icon: Heart, desc: "🎉 Friday launch — VM partner invites" },
   { href: "/partner-outreach", label: "Partner Outreach", icon: Send, desc: "Tencent, ByteDance, NVIDIA, Anthropic" },
   { href: "/agents", label: "Agents", icon: Bot, desc: "Manage the team" },
   { href: "/chat", label: "Chat", icon: MessageSquare, desc: "All channels, one view" },
